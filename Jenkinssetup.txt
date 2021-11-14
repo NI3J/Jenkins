@@ -1,0 +1,49 @@
+Jenkins installation in CentOs/Redhat.
+To use this repository, run the following command: 
+
+Step No1: add repository
+
+
+  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+  
+If you've previously imported the key from Jenkins, the rpm --import will fail because you already have a key. Please ignore that and move on. 
+Step No2:- Install epel and openjdk softwares
+
+  yum install epel-release # repository that provides 'daemonize'
+  yum install java-11-openjdk-devel
+  yum install jenkins -y
+  
+Step No3:- Start the Jenkin service and enable 
+
+# systemctl start jenkins
+# systemctl enable jenkins
+
+
+Step No:4: Add port in FirewallD
+
+# firewall-cmd --permanent --zone=public --add-port=8080/tcp
+# firewall-cmd – -reload
+
+Step No:5 Open browser
+
+Type http:[systemip]:8080
+http:10.0.0.22:8080
+Unlock Jenkins
+When you access Jenkins for the first time (after installation) it will ask you the password. And to know the password run the below command, and you will see a 32-character alphanumeric password.
+
+$ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Xysk23kklfxkfjd
+
+Copy the password and paste it into the Jenkins Administrator section.
+
+On the Next page, Jenkins will ask you to choose/install the suggested plugins or the select most suitable/specific plugins.
+For this blog, I choose suggested plugins to continue the plugin’s installation process.
+Customize Jenkins
+
+Next, it will ask you to setup the first admin user, fill in the details and click on ‘save and continue’.
+
+In the next steps, you will get the Jenkins URL with the port. Click on ‘save and finish‘. 
+
+
